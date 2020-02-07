@@ -1,0 +1,22 @@
+version: "3.1"
+
+services:
+  api:
+    restart: always
+    image: api:latest
+    links:
+      - mongo
+    environment:
+      ENV_NAME: dev
+    command: npm start
+    ports:
+      - 7001:7001
+  mongo:
+    image: mongo:latest
+    restart: always
+    volumes:
+      - ./data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE= Hezflix
+    ports:
+      - 27017:27017
